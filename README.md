@@ -14,7 +14,9 @@ Experimental two-stage pipeline for extracting structured metadata (`festival_na
 
 ## Evaluation Criteria & Inclusive Duration Rule
 * **Inclusive Duration Rule:** Event duration is calculated inclusively so that the start day counts as Day 1:
-  $$\text{duration\_days} = (\text{end\_date} - \text{start\_date}) + 1$$
+
+$$\texttt{duration\_days} = (\texttt{end\_date} - \texttt{start\_date}) + 1$$
+
   *(e.g., an event running from October 6 to October 8 lasts $8 - 6 + 1 = 3$ days; a single-day event lasts $1$ day).*
 * **Field-by-Field Matching Criteria ($1$ = match, $0$ = mismatch):**
   * **`city_name` & `festival_name`:** Case-insensitive semantic match against ground truth (verified manually to avoid false positives/negatives from minor punctuation or formatting differences).
