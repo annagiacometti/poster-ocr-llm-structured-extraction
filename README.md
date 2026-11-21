@@ -3,7 +3,7 @@
 Experimental two-stage pipeline for extracting structured metadata (`festival_name`, `city_name`, `start_date`, `end_date`, `duration_days`) from heterogeneous event poster images.
 
 ## Dataset & Sample Size
-* **Sample Size:** $N = 20$ event poster images (`poster_id` used as unique primary key).
+* **Sample Size:** 20 event poster images (`poster_id` used as unique primary key).
 * **Ground Truth:** Manually annotated reference dataset (`data/poster_ground_truth.xlsx`).
 
 ## Pipeline Architecture
@@ -15,15 +15,15 @@ Experimental two-stage pipeline for extracting structured metadata (`festival_na
 ## Evaluation Criteria & Inclusive Duration Rule
 * **Inclusive Duration Rule:** Event duration is calculated inclusively so that the start day counts as Day 1:
 
-$$\texttt{duration\_days} = (\texttt{end\_date} - \texttt{start\_date}) + 1$$
+  `duration_days = (end_date - start_date) + 1`
 
-  *(e.g., an event running from October 6 to October 8 lasts $8 - 6 + 1 = 3$ days; a single-day event lasts $1$ day).*
-* **Field-by-Field Matching Criteria ($1$ = match, $0$ = mismatch):**
+  *(e.g., an event running from October 6 to October 8 lasts `8 - 6 + 1 = 3` days; a single-day event lasts `1` day).*
+* **Field-by-Field Matching Criteria (`1` = match, `0` = mismatch):**
   * **`city_name` & `festival_name`:** Case-insensitive semantic match against ground truth (verified manually to avoid false positives/negatives from minor punctuation or formatting differences).
   * **`start_date` & `end_date`:** Exact match on full date (`DD/MM/YYYY`), including the year (`YYYY`). Missing years (`XXXX`) or hallucinated dates are marked as `0`.
   * **`duration_days`:** Exact integer match (`INT(GT) == INT(Python_calc)`) against ground truth inclusive duration.
 
-## Evaluation Summary ($N = 20$)
+## Evaluation Summary (N = 20)
 * **JSON Syntactic Validity:** 20 / 20 (100.0%)
 * **`city_name`:** 17 / 20 (85.0%)
 * **`duration_days` (deterministic Python calculation):** 13 / 20 (65.0%)
